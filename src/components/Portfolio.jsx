@@ -135,7 +135,7 @@ const NeuralNetworkBackground = () => {
   if (!mounted) return null;
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-0 pointer-events-none" />
+    <div ref={containerRef} className="fixed inset-0 z-0 pointer-events-none opacity-50" />
   );
 };
 
@@ -586,621 +586,603 @@ export default function Portfolio() {
       {/* Main content */}
       <main className="relative z-10 py-8 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto">
-          
-            
-              <motion.section
-                id="home"
+
+
+          <motion.section
+            id="home"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+
+            transition={{ duration: 0.5 }}
+            className="flex flex-col lg:flex-row items-center justify-between min-h-[80vh] py-24 md:py-32 relative gap-8 scroll-mt-24"
+          >
+            {/* LEFT: text content */}
+            <div className="flex-1 flex flex-col items-start lg:items-start text-left">
+              {/* Status badge */}
+              <motion.div
+                className="flex items-center gap-2 mb-6 text-xs text-gray-400 font-mono"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block" />
+                <span className="text-green-400">SYSTEM ONLINE</span>
+                <span className="ml-4 text-cyan-600">[SYS: 98.7%]</span>
+              </motion.div>
+
+              {/* Main title with scramble */}
+              <HeroHeading />
+
+              {/* Stat counters */}
+              <motion.div
+                className="flex gap-8 mt-6 text-sm font-mono"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                
-                transition={{ duration: 0.5 }}
-                className="flex flex-col lg:flex-row items-center justify-between min-h-[80vh] py-12 relative gap-8"
+                transition={{ delay: 1.2 }}
               >
-                {/* LEFT: text content */}
-                <div className="flex-1 flex flex-col items-start lg:items-start text-left">
-                  {/* Status badge */}
-                  <motion.div
-                    className="flex items-center gap-2 mb-6 text-xs text-gray-400 font-mono"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block" />
-                    <span className="text-green-400">SYSTEM ONLINE</span>
-                    <span className="ml-4 text-cyan-600">[SYS: 98.7%]</span>
-                  </motion.div>
+                {[['2×', 'INTL AWARDS'], ['5×', 'NATIONAL'], ['200+', 'COMMUNITY'], ['14', 'PROJECTS']].map(([n, l]) => (
+                  <div key={l} className="text-center">
+                    <div className="text-cyan-400 text-xl font-bold">{n}</div>
+                    <div className="text-gray-500 text-xs">{l}</div>
+                  </div>
+                ))}
+              </motion.div>
 
-                  {/* Main title with scramble */}
-                  <HeroHeading />
+              {/* Bio */}
+              <motion.p
+                className="text-gray-400 max-w-md mt-6 text-sm font-mono"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.4 }}
+              >
+                <span className="text-cyan-400">// Bio:</span> Robotics & AI Engineer — ESP32 to neural networks, schematic to deployment.
+              </motion.p>
 
-                  {/* Stat counters */}
-                  <motion.div
-                    className="flex gap-8 mt-6 text-sm font-mono"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.2 }}
-                  >
-                    {[['2×', 'INTL AWARDS'], ['5×', 'NATIONAL'], ['200+', 'COMMUNITY'], ['14', 'PROJECTS']].map(([n, l]) => (
-                      <div key={l} className="text-center">
-                        <div className="text-cyan-400 text-xl font-bold">{n}</div>
-                        <div className="text-gray-500 text-xs">{l}</div>
-                      </div>
-                    ))}
-                  </motion.div>
-
-                  {/* Bio */}
-                  <motion.p
-                    className="text-gray-400 max-w-md mt-6 text-sm font-mono"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 1.4 }}
-                  >
-                    <span className="text-cyan-400">// Bio:</span> Robotics & AI Engineer — ESP32 to neural networks, schematic to deployment.
-                  </motion.p>
-
-                  {/* Links and CTA */}
-                  <motion.div
-                    className="mt-8 flex flex-wrap gap-4 items-center"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 1.6 }}
-                  >
-                    <a href="/Raj_Resume.pdf" target="_blank"
-                      className="relative group inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold bg-cyan-500/10 border border-cyan-500/50 text-cyan-300 overflow-hidden transition-all duration-300 hover:text-black hover:border-cyan-400"
-                    >
-                      <span className="absolute inset-0 bg-cyan-400 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
-                      <span className="relative z-10">📄 DOSSIER</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/raj-krish-3a7a3b285/" target="_blank" className="text-xs text-gray-400 hover:text-cyan-400 transition-colors">LinkedIn</a>
-                    <a href="https://github.com/rajkrish0608" target="_blank" className="text-xs text-gray-400 hover:text-cyan-400 transition-colors">GitHub</a>
-                    <a href="mailto:rajkrish060804@gmail.com" className="text-xs text-gray-400 hover:text-cyan-400 transition-colors">Email</a>
-                  </motion.div>
-                </div>
-
-                {/* RIGHT: 3D wireframe scene */}
-                <motion.div
-                  className="flex-1 w-full max-w-sm lg:max-w-md h-80 lg:h-[480px] relative"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.2, delay: 0.5 }}
+              {/* Links and CTA */}
+              <motion.div
+                className="mt-8 flex flex-wrap gap-4 items-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.6 }}
+              >
+                <a href="/Raj_Resume.pdf" target="_blank"
+                  className="relative group inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold bg-cyan-500/10 border border-cyan-500/50 text-cyan-300 overflow-hidden transition-all duration-300 hover:text-black hover:border-cyan-400"
                 >
-                  {/* HUD corner brackets */}
-                  <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-cyan-500 z-10" />
-                  <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-cyan-500 z-10" />
-                  <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-cyan-500 z-10" />
-                  <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-cyan-500 z-10" />
-                  <div className="absolute inset-0 z-0">
-                    <HeroScene />
-                  </div>
-                  {/* Profile photo overlay centered in sphere */}
-                  <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-                    <div className="w-32 h-32 rounded-full border-2 border-cyan-400/60 overflow-hidden shadow-[0_0_20px_rgba(0,212,255,0.4)]">
-                      <img src="/profile.jpg" alt="Profile" className="object-cover w-full h-full" />
-                    </div>
-                  </div>
-                  {/* Label */}
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-cyan-600/70 font-mono tracking-widest">RAJ_KRISH.exe</div>
-                </motion.div>
+                  <span className="absolute inset-0 bg-cyan-400 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
+                  <span className="relative z-10">📄 DOSSIER</span>
+                </a>
+                <a href="https://www.linkedin.com/in/raj-krish-3a7a3b285/" target="_blank" className="text-xs text-gray-400 hover:text-cyan-400 transition-colors">LinkedIn</a>
+                <a href="https://github.com/rajkrish0608" target="_blank" className="text-xs text-gray-400 hover:text-cyan-400 transition-colors">GitHub</a>
+                <a href="mailto:rajkrish060804@gmail.com" className="text-xs text-gray-400 hover:text-cyan-400 transition-colors">Email</a>
+              </motion.div>
+            </div>
 
-                {/* Decorative code comment */}
-                <div className="absolute bottom-4 left-0 text-xs text-cyan-600/50 hidden lg:block font-mono">
-                  <pre>{`/* SYS: ONLINE · AI: ACTIVE · BUILD: READY */`}</pre>
+            {/* RIGHT: 3D wireframe scene */}
+            <motion.div
+              className="flex-1 w-full max-w-sm lg:max-w-md h-80 lg:h-[480px] relative"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.5 }}
+            >
+              {/* HUD corner brackets */}
+              <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-cyan-500 z-10" />
+              <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-cyan-500 z-10" />
+              <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-cyan-500 z-10" />
+              <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-cyan-500 z-10" />
+              <div className="absolute inset-0 z-0">
+                <HeroScene />
+              </div>
+              {/* Profile photo overlay centered in sphere */}
+              <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                <div className="w-32 h-32 rounded-full border-2 border-cyan-400/60 overflow-hidden shadow-[0_0_20px_rgba(0,212,255,0.4)]">
+                  <img src="/profile.jpg" alt="Profile" className="object-cover w-full h-full" />
                 </div>
-              </motion.section>
+              </div>
+              {/* Label */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-cyan-600/70 font-mono tracking-widest">RAJ_KRISH.exe</div>
+            </motion.div>
 
-            
-              <motion.section
-                id="about"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                
-                transition={{ duration: 0.5 }}
-                className="max-w-4xl mx-auto py-12 px-4"
+            {/* Decorative code comment */}
+            <div className="absolute bottom-4 left-0 text-xs text-cyan-600/50 hidden lg:block font-mono">
+              <pre>{`/* SYS: ONLINE · AI: ACTIVE · BUILD: READY */`}</pre>
+            </div>
+          </motion.section>
+
+
+          <motion.section
+            id="about"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+
+            transition={{ duration: 0.5 }}
+            className="max-w-4xl mx-auto py-24 md:py-32 px-4 scroll-mt-24"
+          >
+            <div className="flex flex-col lg:flex-row gap-12 items-center">
+              {/* About content */}
+              <motion.div
+                className="flex-1 space-y-6"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
               >
-                <div className="flex flex-col lg:flex-row gap-12 items-center">
-                  {/* About content */}
-                  <motion.div
-                    className="flex-1 space-y-6"
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text">
-                      SYSTEM ARCHITECT
-                    </h2>
-
-                    <div className="space-y-4 text-gray-300">
-                      <p>
-                        I'm Raj Krish — a Robotics & AI Engineer who builds systems that think, sense, and act.
-                      </p>
-
-                      <p>
-                        Not prototypes. Not demos. Production-grade machines that solve problems people haven't fully articulated yet.
-                      </p>
-
-                      <p>
-                        I operate at the intersection of hardware and intelligence — where an ESP32 talks to a neural network, where a sensor array feeds a real-time decision engine, where the gap between "concept" and "deployed" closes in weeks, not years.
-                      </p>
-
-                      <p>
-                        Harvard Hackathon Winner. Microsoft × Stanford Finalist. 2× International & 5× National Tech Competition Winner. B.Tech Computer Engineering, Batch '27 — still building.
-                      </p>
-
-                      <p>
-                        My work spans battlefield AI wearables, emergency health systems, smart mobility, and offline-first mobile platforms. Every project starts with one question:
-                      </p>
-
-                      <p className="italic text-cyan-400 font-semibold my-4">
-                        "What breaks if this doesn't work?"
-                      </p>
-
-                      <p>
-                        That question drives every circuit I design, every model I train, every line of code I ship.
-                      </p>
-
-                      <p>
-                        I founded Pradyog — a 200+ member student tech chapter — because great builders need a community to sharpen against. I serve as Vice Chair of the IEEE Computer Society chapter because standards matter when lives are on the line.
-                      </p>
-
-                      <p className="mt-6 font-bold text-white text-lg">
-                        I don't build for portfolios.<br />
-                        I build for impact.
-                      </p>
-                    </div>
-
-                    <div className="pt-4">
-                      <h3 className="text-xl font-semibold text-cyan-400 mb-3">Core Capabilities:</h3>
-
-                      <ul className="grid grid-cols-2 gap-2">
-                        {["ROS · Sensor Fusion", "Edge AI · TinyML", "Autonomous Navigation", "Computer Vision", "Actuator Control", "Neural Networks", "Real-Time Systems", "OpenCV · TensorFlow", "ESP32 · Raspberry Pi", "React.js · Node.js", "Arduino · LIDAR", "Flutter · BLoC", "PCB Design", "PostgreSQL · SQLite", "Embedded C/C++", "REST APIs · Hive", "Sensor Integration", "AES-256 Encryption", "MQTT · WiFi Protocols", "Offline-First Design", "Edge Computing", "Secure Local Storage", "Hardware-SW Bridge", "Fault-Tolerant Systems"].map((item, index) => (
-                          <motion.li
-                            key={index}
-                            className="flex items-center text-gray-300"
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.6 + (index * 0.05) }}
-                          >
-                            <span className="mr-2 text-xs text-cyan-500">&gt;</span>
-                            {item}
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
-                  </motion.div>
-
-                  {/* Decorative visualization */}
-                  <motion.div
-                    className="relative w-full max-w-md aspect-square"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                  >
-                    <div className="w-full h-full rounded-xl border border-cyan-500/30 backdrop-blur-sm bg-black/30 overflow-hidden p-4 relative">
-                      {/* Placeholder for a 3D model or visualization */}
-                      <div className="absolute inset-0 flex items-center justify-center text-cyan-500/50">
-                        <div className="text-center">
-                          <div className="text-8xl mb-4 opacity-30">🤖</div>
-                          <div className="text-xs text-cyan-400/70">NEURAL ARCHITECTURE VISUALIZATION</div>
-                        </div>
-                      </div>
-
-                      {/* HUD corners */}
-                      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-500"></div>
-                      <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-500"></div>
-                      <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-cyan-500"></div>
-                      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyan-500"></div>
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.section>
-
-            
-              <motion.section
-                id="projects"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                
-                transition={{ duration: 0.5 }}
-                className="py-12 px-4"
-              >
-                <motion.h2
-                  className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  PROJECT DATABASE
-                </motion.h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {projects.map((project, index) => (
-                    <motion.div
-                      key={project.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                    >
-                      <Card className="overflow-hidden bg-black/40 backdrop-blur-sm border border-cyan-500/30 h-full group hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300">
-                        <CardContent className="p-6 relative h-full">
-                          {/* Top corner decoration */}
-                          <div className="absolute top-0 right-0 w-12 h-12">
-                            <div className="absolute top-0 right-0 w-full h-full border-t-2 border-r-2 border-cyan-500/50"></div>
-                            <div className="absolute bottom-0 left-0 w-3 h-3 bg-cyan-500"></div>
-                          </div>
-
-                          {/* Project icon */}
-                          <div className="mb-4 text-cyan-400">
-                            {project.icon}
-                          </div>
-
-                          {/* Project title */}
-                          <h3 className="text-xl font-bold text-cyan-300 mb-2 group-hover:text-cyan-200 transition-colors">
-                            {project.title}
-                          </h3>
-
-                          {/* Project description */}
-                          <p className="text-gray-400 text-sm mb-4">
-                            {project.description}
-                          </p>
-
-                          {/* Project tags */}
-                          <div className="flex flex-wrap gap-2 mt-auto mb-4">
-                            {project.tags.map((tag, tagIndex) => (
-                              <span
-                                key={tagIndex}
-                                className="text-xs py-1 px-2 rounded-sm bg-cyan-900/30 text-cyan-300 border border-cyan-500/20"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-
-                          {/* View Project Link/Button */}
-                          <div className="mt-2 text-right">
-                            <a
-                              href={project.link || "#"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center text-xs font-semibold text-cyan-400 hover:text-cyan-200 transition-colors py-1.5 px-3 border border-cyan-500/30 rounded-sm hover:bg-cyan-900/40"
-                            >
-                              View Project <ChevronRight size={14} className="ml-1" />
-                            </a>
-                          </div>
-
-                          {/* Bottom scan line effect */}
-                          <motion.div
-                            className="absolute bottom-0 left-0 h-0.5 bg-cyan-500/50"
-                            initial={{ width: 0 }}
-                            whileInView={{ width: '100%' }}
-                            transition={{ duration: 1, delay: 0.5 }}
-                          />
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.section>
-
-            
-              <motion.section
-                id="skills"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                
-                transition={{ duration: 0.5 }}
-                className="py-12 px-4"
-              >
-                <motion.h2
-                  className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  TECHNICAL CAPABILITIES
-                </motion.h2>
-
-                <motion.p
-                  className="text-center text-gray-300 max-w-2xl mx-auto mb-8"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  Core technologies and frameworks I use to build advanced AI and robotic systems.
-                </motion.p>
-
-
-
-                <div className="max-w-5xl mx-auto space-y-10">
-
-                  {/* ROBOTICS & EMBEDDED */}
-                  <div>
-                    <motion.h3
-                      className="text-lg font-bold text-cyan-400 tracking-widest mb-4 border-b border-cyan-500/30 pb-2"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 }}
-                    >
-                      [ ROBOTICS & EMBEDDED ]
-                    </motion.h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      <TechSkillCard icon={<Server size={24} />} name="ROS" level={88} color="cyan" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="ESP32" level={95} color="cyan" />
-                      <TechSkillCard icon={<Code size={24} />} name="Raspberry Pi" level={96} color="red" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Arduino" level={94} color="blue" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="LIDAR" level={85} color="purple" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="IMU Sensors" level={88} color="green" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Thermal Cameras" level={82} color="red" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Sensor Fusion" level={90} color="cyan" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="PCB Design" level={80} color="purple" />
-                      <TechSkillCard icon={<Zap size={24} />} name="Embedded C/C++" level={92} color="red" />
-                      <TechSkillCard icon={<Zap size={24} />} name="Real-Time Systems" level={89} color="blue" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Actuator Control" level={87} color="green" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Autonomous Navigation" level={91} color="cyan" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Servo & Motor Control" level={90} color="purple" />
-                    </div>
-                  </div>
-
-                  {/* ARTIFICIAL INTELLIGENCE */}
-                  <div>
-                    <motion.h3
-                      className="text-lg font-bold text-purple-400 tracking-widest mb-4 border-b border-purple-500/30 pb-2"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 }}
-                    >
-                      [ ARTIFICIAL INTELLIGENCE ]
-                    </motion.h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      <TechSkillCard icon={<Cpu size={24} />} name="Python" level={98} color="blue" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="TensorFlow" level={95} color="cyan" />
-                      <TechSkillCard icon={<Database size={24} />} name="OpenCV" level={89} color="blue" />
-                      <TechSkillCard icon={<Database size={24} />} name="Computer Vision" level={88} color="green" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Neural Networks" level={93} color="purple" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Edge AI" level={90} color="cyan" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="TinyML" level={85} color="green" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Embedded ML" level={88} color="red" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Facial Recognition" level={86} color="purple" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Spectral Analysis" level={80} color="blue" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="YOLO" level={87} color="cyan" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Random Forest" level={84} color="green" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="CNN" level={91} color="purple" />
-                    </div>
-                  </div>
-
-                  {/* IoT & HARDWARE SYSTEMS */}
-                  <div>
-                    <motion.h3
-                      className="text-lg font-bold text-green-400 tracking-widest mb-4 border-b border-green-500/30 pb-2"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      [ IoT & HARDWARE SYSTEMS ]
-                    </motion.h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      <TechSkillCard icon={<Cpu size={24} />} name="ESP32 Microcontrollers" level={95} color="cyan" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="MQTT Protocol" level={88} color="green" />
-                      <TechSkillCard icon={<Zap size={24} />} name="WiFi" level={92} color="blue" />
-                      <TechSkillCard icon={<Zap size={24} />} name="Bluetooth" level={87} color="purple" />
-                      <TechSkillCard icon={<Zap size={24} />} name="LoRa Communication" level={80} color="cyan" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Sensor Integration" level={93} color="green" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Edge Computing" level={91} color="blue" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="HW-SW Bridge Design" level={88} color="red" />
-                      <TechSkillCard icon={<Code size={24} />} name="Firmware Development" level={90} color="cyan" />
-                    </div>
-                  </div>
-
-                  {/* FULL-STACK DEVELOPMENT */}
-                  <div>
-                    <motion.h3
-                      className="text-lg font-bold text-blue-400 tracking-widest mb-4 border-b border-blue-500/30 pb-2"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.6 }}
-                    >
-                      [ FULL-STACK DEVELOPMENT ]
-                    </motion.h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      <TechSkillCard icon={<Code size={24} />} name="React.js" level={92} color="cyan" />
-                      <TechSkillCard icon={<Server size={24} />} name="Node.js" level={94} color="green" />
-                      <TechSkillCard icon={<Code size={24} />} name="Flutter" level={88} color="blue" />
-                      <TechSkillCard icon={<Code size={24} />} name="BLoC" level={85} color="purple" />
-                      <TechSkillCard icon={<Database size={24} />} name="PostgreSQL" level={86} color="blue" />
-                      <TechSkillCard icon={<Database size={24} />} name="SQLite" level={90} color="cyan" />
-                      <TechSkillCard icon={<Database size={24} />} name="Hive" level={83} color="green" />
-                      <TechSkillCard icon={<Server size={24} />} name="REST APIs" level={93} color="cyan" />
-                      <TechSkillCard icon={<Server size={24} />} name="Express.js" level={91} color="red" />
-                      <TechSkillCard icon={<Code size={24} />} name="HTML5 · CSS3 · JS" level={96} color="blue" />
-                      <TechSkillCard icon={<Code size={24} />} name="Offline-First Architecture" level={88} color="purple" />
-                    </div>
-                  </div>
-
-                  {/* SECURITY & RESILIENCE */}
-                  <div>
-                    <motion.h3
-                      className="text-lg font-bold text-red-400 tracking-widest mb-4 border-b border-red-500/30 pb-2"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.7 }}
-                    >
-                      [ SECURITY & RESILIENCE ]
-                    </motion.h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      <TechSkillCard icon={<Zap size={24} />} name="AES-256 Encryption" level={88} color="red" />
-                      <TechSkillCard icon={<Database size={24} />} name="Secure Local Storage" level={90} color="cyan" />
-                      <TechSkillCard icon={<Server size={24} />} name="Fault-Tolerant Design" level={87} color="purple" />
-                      <TechSkillCard icon={<Code size={24} />} name="Offline-First Data Arch" level={89} color="blue" />
-                    </div>
-                  </div>
-
-                  {/* TOOLS & WORKFLOW */}
-                  <div>
-                    <motion.h3
-                      className="text-lg font-bold text-cyan-400 tracking-widest mb-4 border-b border-cyan-500/30 pb-2"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 }}
-                    >
-                      [ TOOLS & WORKFLOW ]
-                    </motion.h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      <TechSkillCard icon={<Server size={24} />} name="Git & GitHub" level={95} color="green" />
-                      <TechSkillCard icon={<Code size={24} />} name="VS Code" level={96} color="blue" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Arduino IDE" level={94} color="cyan" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="Proteus" level={82} color="purple" />
-                      <TechSkillCard icon={<Cpu size={24} />} name="KiCad" level={80} color="green" />
-                      <TechSkillCard icon={<Code size={24} />} name="Figma" level={85} color="purple" />
-                      <TechSkillCard icon={<Server size={24} />} name="Postman" level={90} color="red" />
-                      <TechSkillCard icon={<Server size={24} />} name="Linux" level={91} color="cyan" />
-                      <TechSkillCard icon={<Server size={24} />} name="Docker" level={83} color="blue" />
-                      <TechSkillCard icon={<Database size={24} />} name="Firebase" level={93} color="red" />
-                    </div>
-                  </div>
-
-                </div>
-              </motion.section>
-
-
-
-
-            
-              <motion.section
-                id="contact"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                
-                transition={{ duration: 0.5 }}
-                className="py-12 px-4"
-              >
-                <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text">
-                  Contact Me
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text">
+                  SYSTEM ARCHITECT
                 </h2>
 
-                {/* Added text from Home Menu */}
-                <motion.p
-                  className="text-center text-gray-300 max-w-2xl mx-auto mb-6"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                <div className="space-y-4 text-gray-300">
+                  <p>
+                    I'm Raj Krish — a Robotics & AI Engineer who builds systems that think, sense, and act.
+                  </p>
+
+                  <p>
+                    Not prototypes. Not demos. Production-grade machines that solve problems people haven't fully articulated yet.
+                  </p>
+
+                  <p>
+                    I operate at the intersection of hardware and intelligence — where an ESP32 talks to a neural network, where a sensor array feeds a real-time decision engine, where the gap between "concept" and "deployed" closes in weeks, not years.
+                  </p>
+
+                  <p>
+                    Harvard Hackathon Winner. Microsoft × Stanford Finalist. 2× International & 5× National Tech Competition Winner. B.Tech Computer Engineering, Batch '27 — still building.
+                  </p>
+
+                  <p>
+                    My work spans battlefield AI wearables, emergency health systems, smart mobility, and offline-first mobile platforms. Every project starts with one question:
+                  </p>
+
+                  <p className="italic text-cyan-400 font-semibold my-4">
+                    "What breaks if this doesn't work?"
+                  </p>
+
+                  <p>
+                    That question drives every circuit I design, every model I train, every line of code I ship.
+                  </p>
+
+                  <p>
+                    I founded Pradyog — a 200+ member student tech chapter — because great builders need a community to sharpen against. I serve as Vice Chair of the IEEE Computer Society chapter because standards matter when lives are on the line.
+                  </p>
+
+                  <p className="mt-6 font-bold text-white text-lg">
+                    I don't build for portfolios.<br />
+                    I build for impact.
+                  </p>
+                </div>
+
+              </motion.div>
+
+              {/* Decorative visualization */}
+              <motion.div
+                className="relative w-full max-w-md aspect-square"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <div className="w-full h-full rounded-xl border border-cyan-500/30 backdrop-blur-sm bg-black/30 overflow-hidden p-4 relative">
+                  {/* Placeholder for a 3D model or visualization */}
+                  <div className="absolute inset-0 flex items-center justify-center text-cyan-500/50">
+                    <div className="text-center">
+                      <div className="text-8xl mb-4 opacity-30">🤖</div>
+                      <div className="text-xs text-cyan-400/70">NEURAL ARCHITECTURE VISUALIZATION</div>
+                    </div>
+                  </div>
+
+                  {/* HUD corners */}
+                  <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-500"></div>
+                  <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-500"></div>
+                  <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-cyan-500"></div>
+                  <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyan-500"></div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.section>
+
+
+          <motion.section
+            id="projects"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+
+            transition={{ duration: 0.5 }}
+            className="py-24 md:py-32 px-4 scroll-mt-24"
+          >
+            <motion.h2
+              className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              PROJECT DATABASE
+            </motion.h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <Card className="overflow-hidden bg-black/40 backdrop-blur-sm border border-cyan-500/30 h-full flex flex-col group hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300">
+                    <CardContent className="p-6 relative flex flex-col flex-grow">
+                      {/* Top corner decoration */}
+                      <div className="absolute top-0 right-0 w-12 h-12">
+                        <div className="absolute top-0 right-0 w-full h-full border-t-2 border-r-2 border-cyan-500/50"></div>
+                        <div className="absolute bottom-0 left-0 w-3 h-3 bg-cyan-500"></div>
+                      </div>
+
+                      {/* Project icon */}
+                      <div className="mb-4 text-cyan-400">
+                        {project.icon}
+                      </div>
+
+                      {/* Project title */}
+                      <h3 className="text-xl font-bold text-cyan-300 mb-2 group-hover:text-cyan-200 transition-colors">
+                        {project.title}
+                      </h3>
+
+                      {/* Project description */}
+                      <p className="text-gray-400 text-sm mb-4">
+                        {project.description}
+                      </p>
+
+                      {/* Project tags */}
+                      <div className="flex flex-wrap gap-2 mt-auto mb-4">
+                        {project.tags.map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="text-xs py-1 px-2 rounded-sm bg-cyan-900/30 text-cyan-300 border border-cyan-500/20"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* View Project Link/Button */}
+                      <div className="mt-auto pt-4 text-right">
+                        <a
+                          href={project.link || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-xs font-semibold text-cyan-400 hover:text-cyan-200 transition-colors py-1.5 px-3 border border-cyan-500/30 rounded-sm hover:bg-cyan-900/40"
+                        >
+                          View Project <ChevronRight size={14} className="ml-1" />
+                        </a>
+                      </div>
+
+                      {/* Bottom scan line effect */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 h-0.5 bg-cyan-500/50"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '100%' }}
+                        transition={{ duration: 1, delay: 0.5 }}
+                      />
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+
+          <motion.section
+            id="skills"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+
+            transition={{ duration: 0.5 }}
+            className="py-24 md:py-32 px-4 scroll-mt-24"
+          >
+            <motion.h2
+              className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              TECHNICAL CAPABILITIES
+            </motion.h2>
+
+            <motion.p
+              className="text-center text-gray-300 max-w-2xl mx-auto mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              Core technologies and frameworks I use to build advanced AI and robotic systems.
+            </motion.p>
+
+
+
+            <div className="max-w-5xl mx-auto space-y-10">
+
+              {/* ROBOTICS & EMBEDDED */}
+              <div>
+                <motion.h3
+                  className="text-lg font-bold text-cyan-400 tracking-widest mb-4 border-b border-cyan-500/30 pb-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  [ ROBOTICS & EMBEDDED ]
+                </motion.h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <TechSkillCard icon={<Server size={24} />} name="ROS" level={88} color="cyan" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="ESP32" level={95} color="cyan" />
+                  <TechSkillCard icon={<Code size={24} />} name="Raspberry Pi" level={96} color="red" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Arduino" level={94} color="blue" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="LIDAR" level={85} color="purple" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="IMU Sensors" level={88} color="green" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Thermal Cameras" level={82} color="red" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Sensor Fusion" level={90} color="cyan" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="PCB Design" level={80} color="purple" />
+                  <TechSkillCard icon={<Zap size={24} />} name="Embedded C/C++" level={92} color="red" />
+                  <TechSkillCard icon={<Zap size={24} />} name="Real-Time Systems" level={89} color="blue" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Actuator Control" level={87} color="green" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Autonomous Navigation" level={91} color="cyan" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Servo & Motor Control" level={90} color="purple" />
+                </div>
+              </div>
+
+              {/* ARTIFICIAL INTELLIGENCE */}
+              <div>
+                <motion.h3
+                  className="text-lg font-bold text-purple-400 tracking-widest mb-4 border-b border-purple-500/30 pb-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  🚀 Building something bold? Crafting battlefield bots, medtech wearables, or real-time AI systems?
-                  I love trading notes with fellow builders—send me what you’re making.
-                  Let’s collaborate on tech that doesn’t just work—it matters.
-                </motion.p>
+                  [ ARTIFICIAL INTELLIGENCE ]
+                </motion.h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <TechSkillCard icon={<Cpu size={24} />} name="Python" level={98} color="blue" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="TensorFlow" level={95} color="cyan" />
+                  <TechSkillCard icon={<Database size={24} />} name="OpenCV" level={89} color="blue" />
+                  <TechSkillCard icon={<Database size={24} />} name="Computer Vision" level={88} color="green" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Neural Networks" level={93} color="purple" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Edge AI" level={90} color="cyan" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="TinyML" level={85} color="green" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Embedded ML" level={88} color="red" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Facial Recognition" level={86} color="purple" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Spectral Analysis" level={80} color="blue" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="YOLO" level={87} color="cyan" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Random Forest" level={84} color="green" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="CNN" level={91} color="purple" />
+                </div>
+              </div>
 
-                {/* Contact Form */}
-                <form
-                  className="max-w-xl mx-auto space-y-4"
-                  action="https://formspree.io/f/xjkwdrby"
-                  method="POST"
+              {/* IoT & HARDWARE SYSTEMS */}
+              <div>
+                <motion.h3
+                  className="text-lg font-bold text-green-400 tracking-widest mb-4 border-b border-green-500/30 pb-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
                 >
-                  <div className="relative">
-                    <span className="absolute left-3 top-3 text-cyan-600 text-xs font-mono">NAME &gt;</span>
-                    <input type="text" name="name" placeholder="Raj Krish" required
-                      className="w-full pl-20 pr-4 py-3 bg-black/60 border border-cyan-500/30 text-cyan-100 placeholder-gray-600 font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors rounded-sm" />
-                  </div>
-                  <div className="relative">
-                    <span className="absolute left-3 top-3 text-cyan-600 text-xs font-mono">EMAIL &gt;</span>
-                    <input type="email" name="email" placeholder="you@domain.com" required
-                      className="w-full pl-20 pr-4 py-3 bg-black/60 border border-cyan-500/30 text-cyan-100 placeholder-gray-600 font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors rounded-sm" />
-                  </div>
-                  <div className="relative">
-                    <span className="absolute left-3 top-3 text-cyan-600 text-xs font-mono">SUBJ &gt;</span>
-                    <input type="text" name="subject" placeholder="Collaboration / Hire / Build"
-                      className="w-full pl-20 pr-4 py-3 bg-black/60 border border-cyan-500/30 text-cyan-100 placeholder-gray-600 font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors rounded-sm" />
-                  </div>
-                  <div className="relative">
-                    <span className="absolute left-3 top-3 text-cyan-600 text-xs font-mono">MSG &gt;</span>
-                    <textarea name="message" rows="5" placeholder="Your message..." required
-                      className="w-full pl-20 pr-4 py-3 bg-black/60 border border-cyan-500/30 text-cyan-100 placeholder-gray-600 font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors rounded-sm resize-none" />
-                  </div>
-                  <button
-                    type="submit"
-                    className="relative group w-full py-3 text-sm font-bold font-mono tracking-widest text-cyan-300 border border-cyan-500/50 bg-cyan-500/5 overflow-hidden transition-all hover:text-black"
-                  >
-                    <span className="absolute inset-0 bg-cyan-400 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
-                    <span className="relative z-10">⟩ TRANSMIT MESSAGE</span>
-                  </button>
-                </form>
+                  [ IoT & HARDWARE SYSTEMS ]
+                </motion.h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <TechSkillCard icon={<Cpu size={24} />} name="ESP32 Microcontrollers" level={95} color="cyan" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="MQTT Protocol" level={88} color="green" />
+                  <TechSkillCard icon={<Zap size={24} />} name="WiFi" level={92} color="blue" />
+                  <TechSkillCard icon={<Zap size={24} />} name="Bluetooth" level={87} color="purple" />
+                  <TechSkillCard icon={<Zap size={24} />} name="LoRa Communication" level={80} color="cyan" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Sensor Integration" level={93} color="green" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Edge Computing" level={91} color="blue" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="HW-SW Bridge Design" level={88} color="red" />
+                  <TechSkillCard icon={<Code size={24} />} name="Firmware Development" level={90} color="cyan" />
+                </div>
+              </div>
 
-                {/* Contact Links */}
-                <motion.div
-                  className="mt-8 text-center space-y-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+              {/* FULL-STACK DEVELOPMENT */}
+              <div>
+                <motion.h3
+                  className="text-lg font-bold text-blue-400 tracking-widest mb-4 border-b border-blue-500/30 pb-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <h3 className="text-lg font-semibold text-cyan-400">Connect with me:</h3>
-                  <div className="flex justify-center gap-4">
-                    <a href="https://www.linkedin.com/in/raj-krish-3a7a3b285/" target="_blank" className="text-cyan-400 hover:underline">LinkedIn</a>
-                    <a href="https://github.com/rajkrish0608" target="_blank" className="text-cyan-400 hover:underline">GitHub</a>
-                    <a href="https://yourwebsite.com" target="_blank" className="text-cyan-400 hover:underline">Website</a>
-                    <a href="mailto:rajkrish060804@gmail.com" className="text-cyan-400 hover:underline">Email</a>
-                  </div>
-                </motion.div>
-              </motion.section>
-
-            
-              <motion.section
-                id="awards"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                
-                transition={{ duration: 0.5 }}
-                className="py-12 px-4"
-              >
-                <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text">
-                  Awards & Achievements
-                </h2>
-
-                {/* Awards Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-
-                  <Card className="bg-black/40 border border-cyan-500/30 rounded-lg p-6 backdrop-blur-sm">
-                    <CardContent>
-                      <h3 className="text-lg font-bold text-cyan-300 mb-3">Pradyog Student Chapter</h3>
-                      <p className="text-gray-300">
-                        Founded a student-led initiative, mentoring "200+ students" in IoT, Robotics, and AI/ML through hands-on sessions and tech challenges.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-black/40 border border-purple-500/30 rounded-lg p-6 backdrop-blur-sm">
-                    <CardContent>
-                      <h3 className="text-lg font-bold text-purple-300 mb-3">Acehack 4.0 & HackUEM</h3>
-                      <p className="text-gray-300">
-                        Organized large-scale hackathons ("1000+ participants, 100+ sponsors") to cultivate innovation on campus.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-black/40 border border-yellow-500/30 rounded-lg p-6 backdrop-blur-sm">
-                    <CardContent>
-                      <h3 className="text-lg font-bold text-yellow-300 mb-3">Hackathon Highlights</h3>
-                      <ul className="text-gray-300 space-y-2">
-                        <li>🥇 Harvard Business School Hackathon</li>
-                        <li>🥇 IIIT Delhi Esya-23</li>
-                        <li>🥈 Microsoft × Stanford Hackathon</li>
-                        <li>🥉 SKIT Startup Expo</li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-
-                  {/* Research Paper Card */}
-                  <Card className="bg-black/40 border border-blue-500/30 rounded-lg p-6 backdrop-blur-sm">
-                    <CardContent>
-                      <h3 className="text-lg font-bold text-blue-300 mb-3">📘 Research Paper</h3>
-                      <p className="text-gray-300">
-                        Published a paper on "Real-Time Gas Detection System using AI-enhanced Sensors" in the International Journal of Emerging Tech Research.
-                      </p>
-                    </CardContent>
-                  </Card>
-
+                  [ FULL-STACK DEVELOPMENT ]
+                </motion.h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <TechSkillCard icon={<Code size={24} />} name="React.js" level={92} color="cyan" />
+                  <TechSkillCard icon={<Server size={24} />} name="Node.js" level={94} color="green" />
+                  <TechSkillCard icon={<Code size={24} />} name="Flutter" level={88} color="blue" />
+                  <TechSkillCard icon={<Code size={24} />} name="BLoC" level={85} color="purple" />
+                  <TechSkillCard icon={<Database size={24} />} name="PostgreSQL" level={86} color="blue" />
+                  <TechSkillCard icon={<Database size={24} />} name="SQLite" level={90} color="cyan" />
+                  <TechSkillCard icon={<Database size={24} />} name="Hive" level={83} color="green" />
+                  <TechSkillCard icon={<Server size={24} />} name="REST APIs" level={93} color="cyan" />
+                  <TechSkillCard icon={<Server size={24} />} name="Express.js" level={91} color="red" />
+                  <TechSkillCard icon={<Code size={24} />} name="HTML5 · CSS3 · JS" level={96} color="blue" />
+                  <TechSkillCard icon={<Code size={24} />} name="Offline-First Architecture" level={88} color="purple" />
                 </div>
-              </motion.section>
+              </div>
 
-            
+              {/* SECURITY & RESILIENCE */}
+              <div>
+                <motion.h3
+                  className="text-lg font-bold text-red-400 tracking-widest mb-4 border-b border-red-500/30 pb-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.7 }}
+                >
+                  [ SECURITY & RESILIENCE ]
+                </motion.h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <TechSkillCard icon={<Zap size={24} />} name="AES-256 Encryption" level={88} color="red" />
+                  <TechSkillCard icon={<Database size={24} />} name="Secure Local Storage" level={90} color="cyan" />
+                  <TechSkillCard icon={<Server size={24} />} name="Fault-Tolerant Design" level={87} color="purple" />
+                  <TechSkillCard icon={<Code size={24} />} name="Offline-First Data Arch" level={89} color="blue" />
+                </div>
+              </div>
 
-          
+              {/* TOOLS & WORKFLOW */}
+              <div>
+                <motion.h3
+                  className="text-lg font-bold text-cyan-400 tracking-widest mb-4 border-b border-cyan-500/30 pb-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  [ TOOLS & WORKFLOW ]
+                </motion.h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <TechSkillCard icon={<Server size={24} />} name="Git & GitHub" level={95} color="green" />
+                  <TechSkillCard icon={<Code size={24} />} name="VS Code" level={96} color="blue" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Arduino IDE" level={94} color="cyan" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="Proteus" level={82} color="purple" />
+                  <TechSkillCard icon={<Cpu size={24} />} name="KiCad" level={80} color="green" />
+                  <TechSkillCard icon={<Code size={24} />} name="Figma" level={85} color="purple" />
+                  <TechSkillCard icon={<Server size={24} />} name="Postman" level={90} color="red" />
+                  <TechSkillCard icon={<Server size={24} />} name="Linux" level={91} color="cyan" />
+                  <TechSkillCard icon={<Server size={24} />} name="Docker" level={83} color="blue" />
+                  <TechSkillCard icon={<Database size={24} />} name="Firebase" level={93} color="red" />
+                </div>
+              </div>
+
+            </div>
+          </motion.section>
+
+
+
+
+
+          <motion.section
+            id="contact"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+
+            transition={{ duration: 0.5 }}
+            className="py-24 md:py-32 px-4 scroll-mt-24"
+          >
+            <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text">
+              Contact Me
+            </h2>
+
+            {/* Added text from Home Menu */}
+            <motion.p
+              className="text-center text-gray-300 max-w-2xl mx-auto mb-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              🚀 Building something bold? Crafting battlefield bots, medtech wearables, or real-time AI systems?
+              I love trading notes with fellow builders—send me what you’re making.
+              Let’s collaborate on tech that doesn’t just work—it matters.
+            </motion.p>
+
+            {/* Contact Form */}
+            <form
+              className="max-w-xl mx-auto space-y-4"
+              action="https://formspree.io/f/xjkwdrby"
+              method="POST"
+            >
+              <div className="relative">
+                <span className="absolute left-3 top-3 text-cyan-600 text-xs font-mono">NAME &gt;</span>
+                <input type="text" name="name" placeholder="Raj Krish" required
+                  className="w-full pl-20 pr-4 py-3 bg-black/60 border border-cyan-500/30 text-cyan-100 placeholder-gray-600 font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors rounded-sm" />
+              </div>
+              <div className="relative">
+                <span className="absolute left-3 top-3 text-cyan-600 text-xs font-mono">EMAIL &gt;</span>
+                <input type="email" name="email" placeholder="you@domain.com" required
+                  className="w-full pl-20 pr-4 py-3 bg-black/60 border border-cyan-500/30 text-cyan-100 placeholder-gray-600 font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors rounded-sm" />
+              </div>
+              <div className="relative">
+                <span className="absolute left-3 top-3 text-cyan-600 text-xs font-mono">SUBJ &gt;</span>
+                <input type="text" name="subject" placeholder="Collaboration / Hire / Build"
+                  className="w-full pl-20 pr-4 py-3 bg-black/60 border border-cyan-500/30 text-cyan-100 placeholder-gray-600 font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors rounded-sm" />
+              </div>
+              <div className="relative">
+                <span className="absolute left-3 top-3 text-cyan-600 text-xs font-mono">MSG &gt;</span>
+                <textarea name="message" rows="5" placeholder="Your message..." required
+                  className="w-full pl-20 pr-4 py-3 bg-black/60 border border-cyan-500/30 text-cyan-100 placeholder-gray-600 font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors rounded-sm resize-none" />
+              </div>
+              <button
+                type="submit"
+                className="relative group w-full py-3 text-sm font-bold font-mono tracking-widest text-cyan-300 border border-cyan-500/50 bg-cyan-500/5 overflow-hidden transition-all hover:text-black"
+              >
+                <span className="absolute inset-0 bg-cyan-400 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
+                <span className="relative z-10">⟩ TRANSMIT MESSAGE</span>
+              </button>
+            </form>
+
+            {/* Contact Links */}
+            <motion.div
+              className="mt-8 text-center space-y-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <h3 className="text-lg font-semibold text-cyan-400">Connect with me:</h3>
+              <div className="flex justify-center gap-4">
+                <a href="https://www.linkedin.com/in/raj-krish-3a7a3b285/" target="_blank" className="text-cyan-400 hover:underline">LinkedIn</a>
+                <a href="https://github.com/rajkrish0608" target="_blank" className="text-cyan-400 hover:underline">GitHub</a>
+                <a href="https://yourwebsite.com" target="_blank" className="text-cyan-400 hover:underline">Website</a>
+                <a href="mailto:rajkrish060804@gmail.com" className="text-cyan-400 hover:underline">Email</a>
+              </div>
+            </motion.div>
+          </motion.section>
+
+
+          <motion.section
+            id="awards"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+
+            transition={{ duration: 0.5 }}
+            className="py-24 md:py-32 px-4 scroll-mt-24"
+          >
+            <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text">
+              Awards & Achievements
+            </h2>
+
+            {/* Awards Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+              <Card className="bg-black/40 border border-cyan-500/30 rounded-lg p-6 backdrop-blur-sm">
+                <CardContent>
+                  <h3 className="text-lg font-bold text-cyan-300 mb-3">Pradyog Student Chapter</h3>
+                  <p className="text-gray-300">
+                    Founded a student-led initiative, mentoring "200+ students" in IoT, Robotics, and AI/ML through hands-on sessions and tech challenges.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-black/40 border border-purple-500/30 rounded-lg p-6 backdrop-blur-sm">
+                <CardContent>
+                  <h3 className="text-lg font-bold text-purple-300 mb-3">Acehack 4.0 & HackUEM</h3>
+                  <p className="text-gray-300">
+                    Organized large-scale hackathons ("1000+ participants, 100+ sponsors") to cultivate innovation on campus.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-black/40 border border-yellow-500/30 rounded-lg p-6 backdrop-blur-sm">
+                <CardContent>
+                  <h3 className="text-lg font-bold text-yellow-300 mb-3">Hackathon Highlights</h3>
+                  <ul className="text-gray-300 space-y-2">
+                    <li>🥇 Harvard Business School Hackathon</li>
+                    <li>🥇 IIIT Delhi Esya-23</li>
+                    <li>🥈 Microsoft × Stanford Hackathon</li>
+                    <li>🥉 SKIT Startup Expo</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* Research Paper Card */}
+              <Card className="bg-black/40 border border-blue-500/30 rounded-lg p-6 backdrop-blur-sm">
+                <CardContent>
+                  <h3 className="text-lg font-bold text-blue-300 mb-3">📘 Research Paper</h3>
+                  <p className="text-gray-300">
+                    Published a paper on "Real-Time Gas Detection System using AI-enhanced Sensors" in the International Journal of Emerging Tech Research.
+                  </p>
+                </CardContent>
+              </Card>
+
+            </div>
+          </motion.section>
+
+
+
+
           {/* close AnimatePresence */}
 
         </div>
