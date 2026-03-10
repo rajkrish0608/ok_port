@@ -559,9 +559,10 @@ export default function Portfolio() {
           {/* Navigation */}
           <nav className="flex gap-6 text-sm">
             {['home', 'about', 'projects', 'skills', 'contact', 'awards'].map(s => (
-              <motion.button
+              <motion.a
                 key={s}
-                onClick={() => setSection(s)}
+                href={`#${s}`}
+                onClick={(e) => { e.preventDefault(); document.getElementById(s)?.scrollIntoView({ behavior: 'smooth' }); setSection(s); }}
                 variants={navVariants}
                 initial="inactive"
                 animate={section === s ? "active" : "inactive"}
@@ -576,7 +577,7 @@ export default function Portfolio() {
                     layoutId="navIndicator"
                   />
                 )}
-              </motion.button>
+              </motion.a>
             ))}
           </nav>
         </div>
@@ -585,13 +586,13 @@ export default function Portfolio() {
       {/* Main content */}
       <main className="relative z-10 py-8 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto">
-          <AnimatePresence mode="wait">
-            {section === 'home' && (
+          
+            
               <motion.section
-                key="home"
+                id="home"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                
                 transition={{ duration: 0.5 }}
                 className="flex flex-col lg:flex-row items-center justify-between min-h-[80vh] py-12 relative gap-8"
               >
@@ -686,14 +687,13 @@ export default function Portfolio() {
                   <pre>{`/* SYS: ONLINE · AI: ACTIVE · BUILD: READY */`}</pre>
                 </div>
               </motion.section>
-            )}
 
-            {section === 'about' && (
+            
               <motion.section
-                key="about"
+                id="about"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                
                 transition={{ duration: 0.5 }}
                 className="max-w-4xl mx-auto py-12 px-4"
               >
@@ -793,14 +793,13 @@ export default function Portfolio() {
                   </motion.div>
                 </div>
               </motion.section>
-            )}
 
-            {section === 'projects' && (
+            
               <motion.section
-                key="projects"
+                id="projects"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                
                 transition={{ duration: 0.5 }}
                 className="py-12 px-4"
               >
@@ -881,14 +880,13 @@ export default function Portfolio() {
                   ))}
                 </div>
               </motion.section>
-            )}
 
-            {section === 'skills' && (
+            
               <motion.section
-                key="skills"
+                id="skills"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                
                 transition={{ duration: 0.5 }}
                 className="py-12 px-4"
               >
@@ -1060,17 +1058,16 @@ export default function Portfolio() {
 
                 </div>
               </motion.section>
-            )}
 
 
 
 
-            {section === 'contact' && (
+            
               <motion.section
-                key="contact"
+                id="contact"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                
                 transition={{ duration: 0.5 }}
                 className="py-12 px-4"
               >
@@ -1141,14 +1138,13 @@ export default function Portfolio() {
                   </div>
                 </motion.div>
               </motion.section>
-            )}
 
-            {section === 'awards' && (
+            
               <motion.section
-                key="awards"
+                id="awards"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                
                 transition={{ duration: 0.5 }}
                 className="py-12 px-4"
               >
@@ -1201,11 +1197,10 @@ export default function Portfolio() {
 
                 </div>
               </motion.section>
-            )}
 
-            {/* <-- close conditional rendering */}
+            
 
-          </AnimatePresence>
+          
           {/* close AnimatePresence */}
 
         </div>
