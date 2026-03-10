@@ -558,7 +558,7 @@ export default function Portfolio() {
 
           {/* Navigation */}
           <nav className="flex gap-6 text-sm">
-            {['home', 'about', 'projects', 'skills', 'contact', 'awards'].map(s => (
+            {['home', 'about', 'projects', 'skills', 'awards', 'contact'].map(s => (
               <motion.a
                 key={s}
                 href={`#${s}`}
@@ -1046,6 +1046,65 @@ export default function Portfolio() {
 
 
           <motion.section
+            id="awards"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+
+            transition={{ duration: 0.5 }}
+            className="py-24 md:py-32 px-4 scroll-mt-24"
+          >
+            <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text">
+              Awards & Achievements
+            </h2>
+
+            {/* Awards Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+
+              <Card className="bg-black/40 border border-cyan-500/30 rounded-lg p-6 backdrop-blur-sm">
+                <CardContent>
+                  <h3 className="text-lg font-bold text-cyan-300 mb-3">Pradyog Student Chapter</h3>
+                  <p className="text-gray-300">
+                    Founded a student-led initiative, mentoring "200+ students" in IoT, Robotics, and AI/ML through hands-on sessions and tech challenges.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-black/40 border border-purple-500/30 rounded-lg p-6 backdrop-blur-sm">
+                <CardContent>
+                  <h3 className="text-lg font-bold text-purple-300 mb-3">Acehack 4.0 & HackUEM</h3>
+                  <p className="text-gray-300">
+                    Organized large-scale hackathons ("1000+ participants, 100+ sponsors") to cultivate innovation on campus.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-black/40 border border-yellow-500/30 rounded-lg p-6 backdrop-blur-sm">
+                <CardContent>
+                  <h3 className="text-lg font-bold text-yellow-300 mb-3">Hackathon Highlights</h3>
+                  <ul className="text-gray-300 space-y-2">
+                    <li>🥇 Harvard Business School Hackathon</li>
+                    <li>🥇 IIIT Delhi Esya-23</li>
+                    <li>🥈 Microsoft × Stanford Hackathon</li>
+                    <li>🥉 SKIT Startup Expo</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* Research Paper Card */}
+              <Card className="bg-black/40 border border-blue-500/30 rounded-lg p-6 backdrop-blur-sm">
+                <CardContent>
+                  <h3 className="text-lg font-bold text-blue-300 mb-3">📘 Research Paper</h3>
+                  <p className="text-gray-300">
+                    Published a paper on "Real-Time Gas Detection System using AI-enhanced Sensors" in the International Journal of Emerging Tech Research.
+                  </p>
+                </CardContent>
+              </Card>
+
+            </div>
+          </motion.section>
+
+
+          <motion.section
             id="contact"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1119,65 +1178,6 @@ export default function Portfolio() {
                 <a href="mailto:rajkrish060804@gmail.com" className="text-cyan-400 hover:underline">Email</a>
               </div>
             </motion.div>
-          </motion.section>
-
-
-          <motion.section
-            id="awards"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-
-            transition={{ duration: 0.5 }}
-            className="py-24 md:py-32 px-4 scroll-mt-24"
-          >
-            <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 text-transparent bg-clip-text">
-              Awards & Achievements
-            </h2>
-
-            {/* Awards Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-
-              <Card className="bg-black/40 border border-cyan-500/30 rounded-lg p-6 backdrop-blur-sm">
-                <CardContent>
-                  <h3 className="text-lg font-bold text-cyan-300 mb-3">Pradyog Student Chapter</h3>
-                  <p className="text-gray-300">
-                    Founded a student-led initiative, mentoring "200+ students" in IoT, Robotics, and AI/ML through hands-on sessions and tech challenges.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-black/40 border border-purple-500/30 rounded-lg p-6 backdrop-blur-sm">
-                <CardContent>
-                  <h3 className="text-lg font-bold text-purple-300 mb-3">Acehack 4.0 & HackUEM</h3>
-                  <p className="text-gray-300">
-                    Organized large-scale hackathons ("1000+ participants, 100+ sponsors") to cultivate innovation on campus.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-black/40 border border-yellow-500/30 rounded-lg p-6 backdrop-blur-sm">
-                <CardContent>
-                  <h3 className="text-lg font-bold text-yellow-300 mb-3">Hackathon Highlights</h3>
-                  <ul className="text-gray-300 space-y-2">
-                    <li>🥇 Harvard Business School Hackathon</li>
-                    <li>🥇 IIIT Delhi Esya-23</li>
-                    <li>🥈 Microsoft × Stanford Hackathon</li>
-                    <li>🥉 SKIT Startup Expo</li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              {/* Research Paper Card */}
-              <Card className="bg-black/40 border border-blue-500/30 rounded-lg p-6 backdrop-blur-sm">
-                <CardContent>
-                  <h3 className="text-lg font-bold text-blue-300 mb-3">📘 Research Paper</h3>
-                  <p className="text-gray-300">
-                    Published a paper on "Real-Time Gas Detection System using AI-enhanced Sensors" in the International Journal of Emerging Tech Research.
-                  </p>
-                </CardContent>
-              </Card>
-
-            </div>
           </motion.section>
 
 
