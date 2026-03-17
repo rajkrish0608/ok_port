@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronRight, Cpu, Server, Zap, Database, Code, Send } from 'lucide-react';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import _ from 'lodash';
 
 // Custom Neural Network Background Component
@@ -311,6 +312,139 @@ const TechSkillCard = ({ icon, name, level = 90, color = 'cyan' }) => {
     </motion.div>
   );
 };
+
+// Detailed Rover 3D Component using GLB Model (Original Materials)
+const RoverHologramVis = () => {
+  const mountRef = useRef(null);
+
+  useEffect(() => {
+    if (!mountRef.current) return;
+    const el = mountRef.current;
+    
+    // Scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, el.clientWidth / el.clientHeight, 0.1, 1000);
+    camera.position.set(18, 12, 24);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(el.clientWidth, el.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Set tone mapping for better realistic material rendering
+    renderer.toneMapping = THREE.ReinhardToneMapping;
+    renderer.toneMappingExposure = 2.0;
+    el.appendChild(renderer.domElement);
+
+    // --- LIGHTING (Required for original materials) ---
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
+
+    const mainLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    mainLight.position.set(10, 20, 10);
+    scene.add(mainLight);
+
+    const fillLight = new THREE.DirectionalLight(0x00d4ff, 0.5); // Subtle cyan fill
+    fillLight.position.set(-10, 5, -10);
+    scene.add(fillLight);
+
+    const roverGroup = new THREE.Group();
+    scene.add(roverGroup);
+
+    // Load the official Perseverance GLB model
+    const loader = new GLTFLoader();
+    loader.load('/models/perseverance.glb', (gltf) => {
+      const model = gltf.scene;
+      
+      // Center and scale
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3()); // Fixed size calculation
+      
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = 14 / maxDim; 
+      model.scale.setScalar(scale);
+      model.position.sub(center.multiplyScalar(scale));
+      model.position.y += 0.5;
+
+      roverGroup.add(model);
+    }, undefined, (error) => console.error(error));
+
+    // --- ENVIRONMENT ---
+    const gridHelper = new THREE.GridHelper(60, 30, 0x00ffff, 0x004466);
+    gridHelper.material.opacity = 0.1;
+    gridHelper.material.transparent = true;
+    gridHelper.position.y = -2.5;
+    scene.add(gridHelper);
+
+    // Floating data particles
+    const particlesGeo = new THREE.BufferGeometry();
+    const particleCount = 200;
+    const posArray = new Float32Array(particleCount * 3);
+    for(let i=0; i < particleCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 80;
+    }
+    particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    const particleMat = new THREE.PointsMaterial({ 
+      size: 0.1, 
+      color: 0x00ffff, 
+      transparent: true, 
+      opacity: 0.3 
+    });
+    const particles = new THREE.Points(particlesGeo, particleMat);
+    scene.add(particles);
+
+    // Subtle cyan fog to blend it into the theme
+    scene.fog = new THREE.FogExp2(0x000000, 0.015);
+
+    // Interactive handling
+    let mouseX = 0;
+    let targetRotation = -Math.PI / 5;
+    
+    const onMouseMove = (event) => {
+      const rect = el.getBoundingClientRect();
+      mouseX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    };
+    el.addEventListener('mousemove', onMouseMove);
+
+    // Animation Loop
+    let time = 0;
+    let animationId;
+    
+    const animate = () => {
+      time += 0.006;
+      targetRotation = -Math.PI/5 + (time * 0.1) + (mouseX * 0.4);
+      roverGroup.rotation.y += (targetRotation - roverGroup.rotation.y) * 0.05;
+      
+      // Animate background particles
+      particles.rotation.y = time * 0.02;
+
+      renderer.render(scene, camera);
+      animationId = requestAnimationFrame(animate);
+    };
+    animate();
+
+    const onResize = () => {
+      if (!el) return;
+      camera.aspect = el.clientWidth / el.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(el.clientWidth, el.clientHeight);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      el.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('resize', onResize);
+      if (el && el.contains(renderer.domElement)) el.removeChild(renderer.domElement);
+      renderer.dispose();
+    };
+  }, []);
+
+  return <div ref={mountRef} className="w-full h-full absolute inset-0 z-0 bg-black/10" />;
+};
+
+// ... existing code ...
+
 
 // Main Portfolio Component
 export default function Portfolio() {
@@ -757,20 +891,56 @@ export default function Portfolio() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="w-full h-full rounded-xl border border-cyan-500/30 backdrop-blur-sm bg-black/30 overflow-hidden p-4 relative">
-                  {/* Placeholder for a 3D model or visualization */}
-                  <div className="absolute inset-0 flex items-center justify-center text-cyan-500/50">
-                    <div className="text-center">
-                      <div className="text-8xl mb-4 opacity-30">🤖</div>
-                      <div className="text-xs text-cyan-400/70">NEURAL ARCHITECTURE VISUALIZATION</div>
+                <div className="w-full h-full min-h-[500px] rounded-sm border border-cyan-500/20 bg-black/80 overflow-hidden relative shadow-[0_0_50px_rgba(0,255,255,0.1)]">
+                  {/* Interactive Holographic Rover Visualization */}
+                  <RoverHologramVis />
+
+                  {/* Top Left HUD */}
+                  <div className="absolute top-6 left-6 z-10 pointer-events-none w-full pr-8">
+                    <div className="flex items-center gap-2">
+                       <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></div>
+                       <div className="text-[10px] md:text-xs text-cyan-400 font-mono tracking-[0.2em] uppercase font-bold">
+                        SCANNING... PERSEVERANCE-01
+                      </div>
+                    </div>
+                    <div className="text-[10px] text-cyan-500/60 font-mono tracking-widest mt-1 ml-4 italic">
+                      STATUS: ACTIVE | WIREFRAME VIEW | AUTONOMOUS MODE
+                    </div>
+                    <div className="text-[10px] text-gray-500 font-mono tracking-[0.15em] mt-6 ml-4">
+                      LAT: 34.5° N<br/>LON: 118.3° W
                     </div>
                   </div>
 
-                  {/* HUD corners */}
-                  <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-500"></div>
-                  <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-500"></div>
-                  <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-cyan-500"></div>
-                  <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyan-500"></div>
+                  {/* UI Corner Brackets - Styled to be more futuristic */}
+                  <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-cyan-500/40"></div>
+                  <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-cyan-500/40"></div>
+                  <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-cyan-500/40"></div>
+                  <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-cyan-500/40"></div>
+
+                  {/* Right Side Data Stream */}
+                  <div className="absolute top-6 right-8 z-10 pointer-events-none text-right">
+                     <div className="text-[9px] text-gray-500 font-mono tracking-widest uppercase">
+                      Grid Resolution
+                    </div>
+                    <div className="text-[11px] text-cyan-400 font-mono font-bold">10M_UNIT</div>
+                  </div>
+                  
+                  <div className="absolute bottom-6 right-8 z-10 pointer-events-none text-right">
+                    <div className="text-[9px] text-gray-500 font-mono tracking-widest uppercase">Link Speed</div>
+                    <div className="text-[14px] text-cyan-400 font-mono font-bold tabular-nums animate-pulse">9.4 GB/s</div>
+                  </div>
+                  
+                  {/* Scanning Progress Bar */}
+                  <div className="absolute bottom-6 left-8 z-10 pointer-events-none">
+                    <div className="text-[9px] text-gray-500 font-mono tracking-widest uppercase mb-1">Buffer Phase</div>
+                    <div className="w-32 h-1 bg-cyan-900/50 rounded-full overflow-hidden">
+                      <motion.div 
+                        className="h-full bg-cyan-500"
+                        animate={{ width: ["0%", "100%", "0%"] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
